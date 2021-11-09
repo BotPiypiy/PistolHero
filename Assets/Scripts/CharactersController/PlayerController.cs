@@ -1,36 +1,35 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : EntityController
 {
     [SerializeField]
     Joystick joystick;
-    Rigidbody rigidbody;
-
-    private void Start()
-    {
-        rigidbody = this.GetComponent<Rigidbody>();
-    }
 
     void FixedUpdate()
     {
-        if (joystick.Horizontal != 0 || joystick.Vertical != 0)
+        if (!freeze)
         {
-            Move();
-        }
-        else
-        {
-            //save current rotation
-            Quaternion currentRot = this.transform.rotation;
+            if (joystick.Horizontal != 0 || joystick.Vertical != 0)
+            {
+                Move();
+            }
+            else
+            {
+                //save current rotation
+                Quaternion currentRot = this.transform.rotation;
 
-            if (LookAtEnemy())      //if we can see and shoot the enemy -> shoot
-                Shoot();
-            else                    //else we don't change the rotation
-                this.transform.rotation = currentRot;
-        }
+                if (LookAtEnemy())      //if we can see and shoot the enemy -> shoot
+                    Shoot();
+                else                    //else we don't change the rotation
+                    this.transform.rotation = currentRot;
+            }
 
-        //if player getted external interaction
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.angularVelocity = Vector3.zero;
+            //if player getted external interaction
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+        }
     }
 
     protected override void Move()
@@ -69,7 +68,7 @@ public class PlayerController : EntityController
             for (uint j = i + 1; j < enemies.Length; j++)
             {
                 if (Vector3.Distance(this.transform.position, enemies[i].transform.position) >
-                    Vector3.Distance(this.transform.position, enemies[i].transform.position))
+                    Vector3.Distance(this.transform.position, enemies[j].transform.position))
                 {
                     temp = enemies[i];
                     enemies[i] = enemies[j];
@@ -78,5 +77,12 @@ public class PlayerController : EntityController
             }
         }
         return enemies;
+    }
+    
+    //finish game (back to my menu)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "EndPortal")
+            SceneManager.LoadScene(0);
     }
 }

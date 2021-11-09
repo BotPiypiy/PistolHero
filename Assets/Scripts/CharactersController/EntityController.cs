@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class EntityController : MonoBehaviour
@@ -14,6 +13,22 @@ public abstract class EntityController : MonoBehaviour
     [SerializeField]
     protected GameObject bulletPrefab;
     float shootDistance = 50;
+    protected Rigidbody rigidbody;
+    [SerializeField]
+    private float freezeTime = 1;
+    protected bool freeze = true;
+
+    protected virtual void Start()
+    {
+        rigidbody = this.GetComponent<Rigidbody>();
+        StartCoroutine(WaitFor(freezeTime));
+    }
+    
+    protected IEnumerator WaitFor(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        freeze = false;
+    }
 
     protected abstract void Move();
 
@@ -39,10 +54,10 @@ public abstract class EntityController : MonoBehaviour
 
     protected bool IsObjectOnRay(GameObject gameObject, float offsetX, float offsetY = 0, float offsetZ = 1)
     {
-        //creating ray(with x offset) and getting all hits
+        //creating ray(with offsets) and getting all hits
         Vector3 origin = this.transform.position + this.transform.forward * offsetZ + this.transform.up * offsetY
             + this.transform.right * offsetX;
-        Debug.DrawRay(origin, this.transform.forward * shootDistance, Color.yellow);
+        //Debug.DrawRay(origin, this.transform.forward * shootDistance, Color.yellow);
         Ray ray = new Ray(origin, this.transform.forward);
         LayerMask layer = LayerMask.GetMask("Default");
         RaycastHit[] rayHits = Physics.RaycastAll(ray, shootDistance, layer, QueryTriggerInteraction.Ignore);

@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
         if (viewTopWallPos.y >= 1 || viewRightWallPos.x >= 1)
         {
             //moving camera up
-            this.transform.position += Vector3.up * cameraSpeed * Time.deltaTime;
+            this.transform.position += Vector3.up * cameraSpeed * Time.unscaledDeltaTime;
         }
     }
 }

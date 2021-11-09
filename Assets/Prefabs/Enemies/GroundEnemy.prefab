@@ -214,6 +214,7 @@ MonoBehaviour:
   fireDelay: 3
   damage: 10
   bulletPrefab: {fileID: 3028489054067370068, guid: d8ea18b04cee6c245a12a6835671be6c, type: 3}
+  freezeTime: 0.1
 --- !u!195 &5299669463238687807
 NavMeshAgent:
   m_ObjectHideFlags: 0

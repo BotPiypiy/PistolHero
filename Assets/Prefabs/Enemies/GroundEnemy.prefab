@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 5299669462754637785}
   - component: {fileID: 5299669462754637786}
   - component: {fileID: 5299669462754637787}
-  - component: {fileID: 5299669462754637784}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5299669462754637784
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5299669462754637790}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5299669463238687815
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,10 +94,10 @@ GameObject:
   - component: {fileID: 5299669463238687810}
   - component: {fileID: 7124234264429337044}
   - component: {fileID: 5299669463238687811}
-  - component: {fileID: 5299669463238687809}
   - component: {fileID: 5299669463238687814}
   - component: {fileID: 5299669463238687807}
-  m_Layer: 7
+  - component: {fileID: 1871508179422020221}
+  m_Layer: 0
   m_Name: GroundEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -212,19 +198,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 1
---- !u!114 &5299669463238687809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5299669463238687815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d12e46a0305f9ee4ab77aad19311301f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
 --- !u!114 &5299669463238687814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,8 +210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85fa7960b8bb0534181456329012a9cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 5
-  fireDelay: 1
+  speed: 5
+  fireDelay: 3
+  damage: 10
+  bulletPrefab: {fileID: 3028489054067370068, guid: d8ea18b04cee6c245a12a6835671be6c, type: 3}
 --- !u!195 &5299669463238687807
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -261,3 +236,16 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1871508179422020221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299669463238687815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93218174116c9c45b0493a4234bc620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
